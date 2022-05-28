@@ -1,4 +1,4 @@
-package com.example.musicgo
+package com.example.musicgo.adapter
 
 
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.musicgo.R
+import com.example.musicgo.fragments.MusicListFragmentDirections
+import com.example.musicgo.model.Song
 
 
 class MusicListAdapter(private val songsList : ArrayList<Song?>):

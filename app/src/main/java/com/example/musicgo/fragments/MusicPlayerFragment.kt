@@ -1,4 +1,4 @@
-package com.example.musicgo
+package com.example.musicgo.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.musicgo.service.MusicService
+import com.example.musicgo.R
+import com.example.musicgo.datasource.MusicSource
 
 
 class MusicPlayerFragment : Fragment() {

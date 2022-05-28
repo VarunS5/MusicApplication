@@ -1,4 +1,4 @@
-package com.example.musicgo
+package com.example.musicgo.service
 
 import android.app.Service
 import android.content.Context

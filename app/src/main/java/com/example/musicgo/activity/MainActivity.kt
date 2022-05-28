@@ -1,4 +1,4 @@
-package com.example.musicgo
+package com.example.musicgo.activity
 
 import android.Manifest
 import android.app.Activity
@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.musicgo.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

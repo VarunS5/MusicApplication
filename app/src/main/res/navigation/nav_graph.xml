@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/musicListFragment"
-        android:name="com.example.musicgo.MusicListFragment"
+        android:name="com.example.musicgo.fragments.MusicListFragment"
         android:label="fragment_music_list"
         tools:layout="@layout/fragment_music_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/musicPlayerFragment"
-        android:name="com.example.musicgo.MusicPlayerFragment"
+        android:name="com.example.musicgo.fragments.MusicPlayerFragment"
         android:label="fragment_music_player"
         tools:layout="@layout/fragment_music_player" >
         <argument

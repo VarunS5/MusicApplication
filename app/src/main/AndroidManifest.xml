@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicGo" >
         <service
-            android:name=".MusicService"
+            android:name=".service.MusicService"
             android:enabled="true"
             android:exported="true" >
         </service>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

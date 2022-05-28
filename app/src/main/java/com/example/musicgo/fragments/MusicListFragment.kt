@@ -1,15 +1,17 @@
-package com.example.musicgo
+package com.example.musicgo.fragments
 
 import android.annotation.SuppressLint
-import android.database.Cursor
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.musicgo.adapter.MusicListAdapter
+import com.example.musicgo.R
+import com.example.musicgo.model.Song
+import com.example.musicgo.datasource.MusicSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -1,4 +1,4 @@
-package com.example.musicgo
+package com.example.musicgo.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

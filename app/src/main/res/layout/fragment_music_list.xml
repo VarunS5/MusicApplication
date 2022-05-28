@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:padding="15sp"
     android:orientation="vertical"
-    tools:context=".MusicListFragment">
+    tools:context=".fragments.MusicListFragment">
 
     <TextView
         android:layout_width="wrap_content"

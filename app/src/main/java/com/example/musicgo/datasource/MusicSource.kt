@@ -1,8 +1,9 @@
-package com.example.musicgo
+package com.example.musicgo.datasource
 
 import android.database.Cursor
 import android.provider.MediaStore
 import android.view.View
+import com.example.musicgo.model.Song
 
 
 class MusicSource private constructor(view: View) {
