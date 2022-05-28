@@ -2,6 +2,7 @@ package com.example.musicgo.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,8 @@ class MusicPlayerFragment : Fragment() {
         val previousButton: Button = view.findViewById(R.id.previous)
         val nextButton: Button = view.findViewById(R.id.next)
         val intent = Intent(view.context, MusicService::class.java)
+        songTitle.isSelected = true
+        songTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
         intent.putExtra("songData", song?.songData)
         view.context.stopService(intent)
         songTitle.text = song?.songName

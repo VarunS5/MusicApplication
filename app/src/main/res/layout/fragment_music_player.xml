@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,73 +10,85 @@
     android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.215">
 
         <ImageView
+            android:id="@+id/cover_image_detail"
             android:layout_width="250sp"
             android:layout_height="250sp"
-            android:id="@+id/cover_image_detail"
-            android:src="@drawable/logo_transparent"/>
+            android:src="@drawable/logo_transparent" />
 
         <TextView
+            android:id="@+id/song_title_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:fontFamily="sans-serif-black"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
             android:text="Song Name"
             android:textColor="@color/black"
-            android:fontFamily="sans-serif-black"
-            android:id="@+id/song_title_detail"/>
+            android:textSize="25sp" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20sp"
-            android:gravity="center">
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/music_progress_detail"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <Button
-                android:layout_width="60sp"
-                android:layout_height="60sp"
-                android:padding="10sp"
-                android:id="@+id/previous"
-                android:background="@drawable/previous" />
-            <Button
-                android:layout_width="60sp"
-                android:layout_height="60sp"
-                android:padding="10sp"
-                android:id="@+id/music_play_pause"
-                android:background="@drawable/play"/>
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.766">
 
-            <Button
-                android:layout_width="60sp"
-                android:layout_height="60sp"
-                android:padding="10sp"
-                android:id="@+id/next"
-                android:background="@drawable/next"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/previous"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:background="@drawable/previous"
+            android:padding="10sp" />
 
+        <Button
+            android:id="@+id/music_play_pause"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:background="@drawable/play"
+            android:padding="10sp" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:background="@drawable/next"
+            android:padding="10sp" />
     </LinearLayout>
 
+    <SeekBar
+        android:id="@+id/music_progress_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
