@@ -28,45 +28,43 @@ class MusicPlayerFragment : Fragment() {
         val pauseOrPlayButton: Button = view.findViewById(R.id.music_play_pause)
         val previousButton: Button = view.findViewById(R.id.previous)
         val nextButton: Button = view.findViewById(R.id.next)
-        val intent = Intent(view.context,MusicService::class.java)
-        intent.putExtra("songData",song?.songData)
+        val intent = Intent(view.context, MusicService::class.java)
+        intent.putExtra("songData", song?.songData)
         view.context.stopService(intent)
         songTitle.text = song?.songName
         view.context.startService(intent)
         pauseOrPlayButton.setBackgroundResource(R.drawable.pause)
         previousButton.setOnClickListener {
 
-            if(songIndex == 0){
-                Toast.makeText(view.context,"No Songs Before",Toast.LENGTH_SHORT).show()
-            }
-            else{
+            if (songIndex == 0) {
+                Toast.makeText(view.context, "No Songs Before", Toast.LENGTH_SHORT).show()
+            } else {
 
                 view.context.stopService(intent)
-                songIndex  -= 1
+                songIndex -= 1
                 song = musicSource.getSongsList()[songIndex]
-                intent.putExtra("songData",song?.songData)
-                intent.putExtra("sameSong",false)
+                intent.putExtra("songData", song?.songData)
+                intent.putExtra("sameSong", false)
                 songTitle.text = song?.songName
                 view.context.startService(intent)
             }
         }
         nextButton.setOnClickListener {
 
-            if(songIndex == musicSource.getSongsList().size-1){
-                Toast.makeText(view.context,"No Songs After",Toast.LENGTH_SHORT).show()
-            }
-            else{
+            if (songIndex == musicSource.getSongsList().size - 1) {
+                Toast.makeText(view.context, "No Songs After", Toast.LENGTH_SHORT).show()
+            } else {
                 view.context.stopService(intent)
-                songIndex+=1
+                songIndex += 1
                 song = musicSource.getSongsList()[songIndex]
-                intent.putExtra("songData",song?.songData)
-                intent.putExtra("sameSong",false)
+                intent.putExtra("songData", song?.songData)
+                intent.putExtra("sameSong", false)
                 songTitle.text = song?.songName
                 view.context.startService(intent)
             }
         }
         pauseOrPlayButton.setOnClickListener {
-            intent.putExtra("sameSong",true)
+            intent.putExtra("sameSong", true)
             isPlaying = if (isPlaying) {
                 pauseOrPlayButton.setBackgroundResource(R.drawable.play)
                 view.context.stopService(intent)
@@ -78,9 +76,6 @@ class MusicPlayerFragment : Fragment() {
             }
         }
         return view
-    }
-    private fun playPrevious(songIndex : Int){
-
     }
 
 }

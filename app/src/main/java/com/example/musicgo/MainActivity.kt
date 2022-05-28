@@ -26,12 +26,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var companyLogo: ImageView
     private lateinit var splashScreen: LinearLayout
     private lateinit var fragmentLayout: LinearLayout
+    private lateinit var progressLayout : LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         companyLogo = findViewById(R.id.company_logo)
         splashScreen = findViewById(R.id.splash_screen)
         fragmentLayout = findViewById(R.id.fragment_layout)
+        progressLayout = findViewById(R.id.progress_layout)
         verifyStoragePermissions(this)
         val fadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
         scope.launch {
@@ -41,6 +43,9 @@ class MainActivity : AppCompatActivity() {
             companyLogo.visibility = View.GONE
             splashScreen.visibility = View.GONE
             fragmentLayout.visibility = View.VISIBLE
+            delay(3000)
+            progressLayout.visibility = View.GONE
+
         }
 
     }
