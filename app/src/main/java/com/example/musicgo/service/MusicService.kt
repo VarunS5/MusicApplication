@@ -4,8 +4,13 @@ import android.app.Service
 import android.content.*
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Binder
 import android.os.IBinder
 import com.example.musicgo.MusicServiceCallbacks
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MusicService : Service(), MediaPlayer.OnPreparedListener {
 
@@ -13,9 +18,10 @@ class MusicService : Service(), MediaPlayer.OnPreparedListener {
     private lateinit var sharedPreferences : SharedPreferences
     private var isSameSong = false
     private val binder = MusicBinder()
-    private lateinit var musicServiceCallbacks : MusicServiceCallbacks
+    private lateinit var musicServiceCallbacks: MusicServiceCallbacks
+    private val scope = CoroutineScope(Dispatchers.Main)
 
-    inner class MusicBinder {
+    inner class MusicBinder : Binder(){
         fun getService(): MusicService{
             return this@MusicService
         }
@@ -39,6 +45,7 @@ class MusicService : Service(), MediaPlayer.OnPreparedListener {
     }
     override fun onDestroy() {
         super.onDestroy()
+        val sharedPreferences = applicationContext.getSharedPreferences("musicPrefs",Context.MODE_PRIVATE)
         val edit : SharedPreferences.Editor = sharedPreferences.edit()
         edit.putInt("LastPosition",mediaPlayer.currentPosition)
         edit.apply()
@@ -46,7 +53,7 @@ class MusicService : Service(), MediaPlayer.OnPreparedListener {
     }
 
     override fun onBind(intent: Intent): IBinder? {
-        return null
+        return binder
     }
 
     override fun onPrepared(player: MediaPlayer?) {
@@ -63,9 +70,17 @@ class MusicService : Service(), MediaPlayer.OnPreparedListener {
         else {
             player?.seekTo(currentPosition)
         }
+        musicServiceCallbacks.setDuration(player?.duration)
+        scope.launch {
+            while (player?.isPlaying == true) {
+                musicServiceCallbacks.setProgress(player?.currentPosition)
+                delay(1000)
+            }
+        }
+
     }
 
-    fun setCallBacks(callBacks : MusicServiceCallbacks){
+    fun setCallBacks (callBacks: MusicServiceCallbacks){
         musicServiceCallbacks = callBacks
     }
 }

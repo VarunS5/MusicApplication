@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -26,6 +27,9 @@ class MusicPlayerFragment : Fragment(), MusicServiceCallbacks {
     private val args: MusicPlayerFragmentArgs by navArgs()
     private lateinit var musicSource: MusicSource
     private lateinit var musicService: MusicService
+    private lateinit var musicSeekBar: SeekBar
+    private lateinit var completedTime : TextView
+    private lateinit var remainingTime : TextView
     private var isPlaying = true
     private var bound = false
     override fun onCreateView(
@@ -37,6 +41,9 @@ class MusicPlayerFragment : Fragment(), MusicServiceCallbacks {
         musicSource = MusicSource.getInstance(view)!!
         var song = musicSource.getSongsList()[songIndex]
         val songTitle: TextView = view.findViewById(R.id.song_title_detail)
+        musicSeekBar = view.findViewById(R.id.music_progress_detail)
+        completedTime = view.findViewById(R.id.time_elapsed)
+        remainingTime = view.findViewById(R.id.time_remaining)
         val pauseOrPlayButton: Button = view.findViewById(R.id.music_play_pause)
         val previousButton: Button = view.findViewById(R.id.previous)
         val nextButton: Button = view.findViewById(R.id.next)
@@ -92,8 +99,10 @@ class MusicPlayerFragment : Fragment(), MusicServiceCallbacks {
             isPlaying = if (isPlaying) {
                 pauseOrPlayButton.setBackgroundResource(R.drawable.play)
                 view.context.stopService(intent)
-                view.context.unbindService(musicServiceConnection)
-                bound = false
+                if(bound) {
+                    view.context.unbindService(musicServiceConnection)
+                    bound = false
+                }
                 false
             } else {
                 pauseOrPlayButton.setBackgroundResource(R.drawable.pause)
@@ -120,8 +129,28 @@ class MusicPlayerFragment : Fragment(), MusicServiceCallbacks {
 
     }
 
-    override fun setProgress() {
-        TODO("Not yet implemented")
+    override fun onStop() {
+        super.onStop()
+        if(bound){
+            view?.context?.unbindService(musicServiceConnection)
+            bound = false
+        }
+    }
+
+    override fun setProgress(progress : Int?) {
+        musicSeekBar.progress = progress!!/1000
+        val minutes : Int = progress!!/(1000*60)
+        val seconds : Int = progress!!/1000 - minutes*60
+        var secondsString = ""
+        if(seconds < 10){
+            secondsString = "0$seconds"
+        }
+        completedTime.text = "$minutes:$secondsString"
+        remainingTime.text = (musicSeekBar.max - progress!!/1000).toString()
+    }
+
+    override fun setDuration(duration: Int?) {
+        musicSeekBar.max = duration!!/1000
     }
 
 }
