@@ -1,19 +1,27 @@
 package com.example.musicgo.service
 
 import android.app.Service
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.media.MediaPlayer
 import android.net.Uri
-import android.os.Binder
 import android.os.IBinder
+import com.example.musicgo.MusicServiceCallbacks
 
 class MusicService : Service(), MediaPlayer.OnPreparedListener {
 
     private val mediaPlayer = MediaPlayer()
     private lateinit var sharedPreferences : SharedPreferences
     private var isSameSong = false
+    private val binder = MusicBinder()
+    private lateinit var musicServiceCallbacks : MusicServiceCallbacks
+
+    inner class MusicBinder {
+        fun getService(): MusicService{
+            return this@MusicService
+        }
+
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val songData = intent?.getStringExtra("songData")
         isSameSong = intent?.getBooleanExtra("sameSong",false) as Boolean
@@ -55,5 +63,9 @@ class MusicService : Service(), MediaPlayer.OnPreparedListener {
         else {
             player?.seekTo(currentPosition)
         }
+    }
+
+    fun setCallBacks(callBacks : MusicServiceCallbacks){
+        musicServiceCallbacks = callBacks
     }
 }
