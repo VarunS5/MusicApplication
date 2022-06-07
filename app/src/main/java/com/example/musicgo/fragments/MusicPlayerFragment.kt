@@ -139,14 +139,26 @@ class MusicPlayerFragment : Fragment(), MusicServiceCallbacks {
 
     override fun setProgress(progress : Int?) {
         musicSeekBar.progress = progress!!/1000
-        val minutes : Int = progress!!/(1000*60)
-        val seconds : Int = progress!!/1000 - minutes*60
+        var minutes : Int = progress!!/(1000*60)
+        var seconds : Int = progress!!/1000 - minutes*60
         var secondsString = ""
-        if(seconds < 10){
-            secondsString = "0$seconds"
+        secondsString = if(seconds < 10){
+            "0$seconds"
+        } else{
+            "$seconds"
         }
         completedTime.text = "$minutes:$secondsString"
-        remainingTime.text = (musicSeekBar.max - progress!!/1000).toString()
+        val timeRemaining : Int =  (musicSeekBar.max - progress!!/1000)
+        val remainingMinutes: Int = timeRemaining/60
+        val remainingSeconds : Int = timeRemaining - remainingMinutes*60
+        secondsString = if(remainingSeconds<10){
+            "0$remainingSeconds"
+        }
+        else{
+            "$remainingSeconds"
+        }
+
+        remainingTime.text = "$remainingMinutes:$secondsString"
     }
 
     override fun setDuration(duration: Int?) {
